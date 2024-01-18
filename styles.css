@@ -51,10 +51,10 @@ body {
 }
 
 .dino {
-  --bottom: 0;
+  --bottom: 12;
   position: absolute;
   left: 1%;
-  height: 30%;
+  height: 20%;
   bottom: calc(var(--bottom) * 1%);
 }
 
@@ -62,5 +62,5 @@ body {
   position: absolute;
   left: calc(var(--left) * 1%);
   height: 30%;
-  bottom: 0;
+  bottom: 13%;
 }

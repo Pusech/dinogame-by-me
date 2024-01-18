@@ -13,6 +13,7 @@ const startScreenElem = document.querySelector("[data-start-screen]");
 setPixelToWorldScale();
 window.addEventListener("resize", setPixelToWorldScale);
 document.addEventListener("keydown", handleStart, { once: true });
+document.addEventListener("touchstart", handleStart, { once: true });
 
 let lastTime;
 let speedScale;
@@ -40,13 +41,13 @@ function checkLose() {
   const dinoRect = getDinoRect();
   return getCactusRects().some((rect) => isCollision(rect, dinoRect));
 }
-
+//20 10 -30 10
 function isCollision(rect1, rect2) {
   return (
-    rect1.left < rect2.right &&
-    rect1.top < rect2.bottom &&
-    rect1.right > rect2.left &&
-    rect1.bottom > rect2.top
+    rect1.left + 15 < rect2.right &&
+    rect1.top + 10 < rect2.bottom &&
+    rect1.right - 30 > rect2.left &&
+    rect1.bottom + 10 > rect2.top
   );
 }
 
@@ -74,6 +75,7 @@ function handleLose() {
   setDinoLose();
   setTimeout(() => {
     document.addEventListener("keydown", handleStart, { once: true });
+    document.addEventListener("touchstart", handleStart, { once: true });
     startScreenElem.classList.remove("hide");
   }, 100);
 }
