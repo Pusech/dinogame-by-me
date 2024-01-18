@@ -19,22 +19,26 @@ let lastTime;
 let speedScale;
 let score;
 function update(time) {
-  if (lastTime == null) {
+  if (document.hasFocus()) {
+    // code to be run every 7 seconds, but only when tab is focused
+
+    if (lastTime == null) {
+      lastTime = time;
+      window.requestAnimationFrame(update);
+      return;
+    }
+    const delta = time - lastTime;
+
+    updateGround(delta, speedScale);
+    updateDino(delta, speedScale);
+    updateCactus(delta, speedScale);
+    updateSpeedScale(delta);
+    updateScore(delta);
+
+    if (checkLose()) return handleLose();
     lastTime = time;
     window.requestAnimationFrame(update);
-    return;
-  }
-  const delta = time - lastTime;
-
-  updateGround(delta, speedScale);
-  updateDino(delta, speedScale);
-  updateCactus(delta, speedScale);
-  updateSpeedScale(delta);
-  updateScore(delta);
-  if (checkLose()) return handleLose();
-
-  lastTime = time;
-  window.requestAnimationFrame(update);
+  } else return handleLose();
 }
 
 function checkLose() {
@@ -91,3 +95,5 @@ function setPixelToWorldScale() {
   worldElem.style.width = `${WORLD_WIDTH * worldToPixelScale * 1.2}px`;
   worldElem.style.height = `${WORLD_HEIGHT * worldToPixelScale * 1.3}px`;
 }
+
+//Добавить handlePause пока что при скрытии браузера игра делает handleLose

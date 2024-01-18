@@ -6,7 +6,7 @@ import {
 
 const SPEED = 0.05;
 const CACTUS_INTERVAL_MIN = 600;
-const CACTUS_INTERVAL_MAX = 2000;
+const CACTUS_INTERVAL_MAX = 1700;
 const worldElem = document.querySelector("[data-world]");
 
 let nextCactusTime;
@@ -42,8 +42,9 @@ export function getCactusRects() {
 
 function createCactus() {
   const cactus = document.createElement("img");
+  const cactusImages = ["imgs/cactus.png", "imgs/cactus2.png"];
   cactus.dataset.cactus = true;
-  cactus.src = "imgs/cactus.png";
+  cactus.src = cactusImages[Math.floor(Math.random() * 2)];
   cactus.classList.add("cactus");
   setCustomProperty(cactus, "--left", 100);
   worldElem.append(cactus);
